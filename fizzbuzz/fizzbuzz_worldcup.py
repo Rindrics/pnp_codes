@@ -10,6 +10,4 @@ for i, player in enumerate(players * n_round):
         msg += 'Buzz'
     if msg == '':
         msg += str(turn)
-    if str(turn) == '12' or str(turn) == '23':
-        msg += '連番!'
     print(player + ': ' + msg)
