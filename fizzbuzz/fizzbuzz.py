@@ -4,6 +4,10 @@ def generate_fizzbuzz_msg(i):
         msg += 'Fizz'
     if i % 5 == 0:
         msg += 'Buzz'
-    if msg == '':
-        msg += str(i)
+
+    if str(i) == '12' or str(i) == '34':
+        msg = str(i) + '連番!'
+    else:
+        if msg == '':
+            msg += str(i)
     return msg
