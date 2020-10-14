@@ -1,10 +1,13 @@
-def fizzbuzz(i):
+def generate_fizzbuzz_msg(i):
     msg = ''
-    if i % 3 == 0 or i % 5 == 0:
-        if i % 3 == 0:
-            msg = msg + 'Fizz'
-        if i % 5 == 0:
-            msg = msg + 'Buzz'
+    if i % 3 == 0:
+        msg += 'Fizz'
+    if i % 5 == 0:
+        msg += 'Buzz'
+
+    if str(i) == '12' or str(i) == '34':
+        msg = str(i) + '連番!'
     else:
-        msg = msg + str(i)
+        if msg == '':
+            msg += str(i)
     return msg

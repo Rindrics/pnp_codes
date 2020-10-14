@@ -1,9 +1,9 @@
-from fizzbuzz import fizzbuzz
+from fizzbuzz import generate_fizzbuzz_msg
 
-players = ['A', 'B', 'C', 'D', 'E', 'F']
+players = ['A', 'B', 'C', 'D']
 n_round = 3
 
 for i, player in enumerate(players * n_round):
     turn = i + 1
-    msg = player + ': ' + fizzbuzz(turn)
-    print(msg)
+    msg  = generate_fizzbuzz_msg(turn)
+    print(player + ': ' + msg)
