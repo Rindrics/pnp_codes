@@ -1,17 +1,24 @@
-from numdefs import baisu_3, baisu_5#, baisu_15, consecutive, others
+from numdefs import baisu_3, baisu_5
+import pytest
 
 
-def test_baisu_3():
-    assert baisu_3(n=1) == [3] and\
-           baisu_3(n=2) == [3, 6] and\
-           baisu_3(n=3) == [3, 6, 9] and\
-           baisu_3(n=4) == [3, 6, 9, 18] and\
-           baisu_3(n=5) == [3, 6, 9, 18, 21] and\
-           baisu_3(n=6) == [3, 6, 9, 18, 21, 24] and\
-           baisu_3(n=7) == [3, 6, 9, 18, 21, 24, 27] and\
-           baisu_3(n=8) == [3, 6, 9, 18, 21, 24, 27, 33] and\
-           baisu_3(n=9) == [3, 6, 9, 18, 21, 24, 27, 33, 36] and\
-           baisu_3(n=10) == [3, 6, 9, 18, 21, 24, 27, 33, 36, 39]
+testdata_for_3 = [
+    (1, 3),
+    (2, 6),
+    (2, 6),
+    (3, 9),
+    (4, 18),
+    (5, 21),
+    (6, 24),
+    (7, 27),
+    (8, 33),
+    (9, 36),
+    (10, 39)
+]
+
+@pytest.mark.parametrize("n, lastone", testdata_for_3)
+def test_baisu_3(n, lastone):
+    assert baisu_3(n=n)[-1] == lastone
 
 def test_baisu_3_exceptions():
     assert baisu_3(n=4)[-1] != 12 and\
