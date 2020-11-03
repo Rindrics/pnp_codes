@@ -1,3 +1,21 @@
+def baisu(multi, n):
+    if multi not in [3, 5]:
+        raise Exception("Behavior for 'multi={multi}' is not defined."
+                        .format(multi=multi))
+    out = [multi]
+    i = 2
+    while len(out) < n:
+        candidate = i * multi
+        if multi == 3:
+            if candidate % 5 != 0 and candidate != 12:
+                out.append(candidate)
+        elif multi == 5:
+            if candidate % 3 != 0 and candidate != 12:
+                out.append(candidate)
+        i += 1
+    return out
+
+
 def baisu_3(n):
     multi = 3
     out = [multi]
@@ -8,6 +26,7 @@ def baisu_3(n):
             out.append(candidate)
         i += 1
     return out
+
 
 def baisu_5(n):
     multi = 5

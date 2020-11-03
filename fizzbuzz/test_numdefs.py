@@ -1,51 +1,56 @@
-from numdefs import baisu_3, baisu_5
+from numdefs import baisu, baisu_3, baisu_5
 import pytest
 
 
-testdata_for_3 = [
-    (1, 3),
-    (2, 6),
-    (2, 6),
-    (3, 9),
-    (4, 18),
-    (5, 21),
-    (6, 24),
-    (7, 27),
-    (8, 33),
-    (9, 36),
-    (10, 39)
-]
+@pytest.mark.parametrize("multi, n, tail",
+                         [(3, 1, 3), (3, 2, 6),
+                          (5, 1, 5), (5, 2, 10),])
+def test_baisu(multi, n, tail):
+    assert baisu(multi=multi, n=n)[-1] == tail
 
-@pytest.mark.parametrize("n, lastone", testdata_for_3)
-def test_baisu_3(n, lastone):
-    assert baisu_3(n=n)[-1] == lastone
 
-def test_baisu_3_exceptions():
-    assert baisu_3(n=4)[-1] != 12 and\
-           baisu_3(n=4)[-1] != 15 and\
-           baisu_3(n=8)[-1] != 30
 
-def test_baisu_5():
-    assert baisu_5(n=1) == [5] and\
-           baisu_5(n=2) == [5, 10] and\
-           baisu_5(n=3) == [5, 10, 20] and\
-           baisu_5(n=4) == [5, 10, 20, 25] and\
-           baisu_5(n=5) == [5, 10, 20, 25, 35]
+def handler(func, **args):
+    return func(**args)
 
-def test_baisu_5_exceptions():
-    assert baisu_5(n=3)[-1] != 15 and\
-           baisu_5(n=5)[-1] != 30
-# def test_consecutive():
-#     assert consecutive(n=1) == [12]
-#     assert consecutive(n=2) == [12, 34]
 
-# def test_others():
-#     assert others(n=1) == [1]
-#     assert others(n=2) == [1, 2]
-#     assert others(n=3) == [1, 2, 4]
-#     assert others(n=4) == [1, 2, 4, 7]
-#     assert others(n=5) == [1, 2, 4, 7, 8]
-#     assert others(n=6) == [1, 2, 4, 7, 8, 11]
-#     assert others(n=7) == [1, 2, 4, 7, 8, 11, 13]
-#     assert others(n=8) == [1, 2, 4, 7, 8, 11, 13, 14]
-#     assert others(n=9) == [1, 2, 4, 7, 8, 11, 13, 14, 16]
+testdata = {
+    #   (multi, n, tail)
+    'correct': [
+        (3, 1, 3),
+        (3, 2, 6),
+        (3, 2, 6),
+        (3, 3, 9),
+        (3, 4, 18),
+        (3, 5, 21),
+        (3, 6, 24),
+        (3, 7, 27),
+        (3, 8, 33),
+        (3, 9, 36),
+        (3, 10, 39),
+        (5, 1, 5),
+        (5, 2, 10),
+        (5, 3, 20),
+        (5, 4, 25),
+        (5, 5, 35),
+        (5, 6, 40),
+        (15, 1, 15),
+    ],
+    'wrong': [
+        (3, 4, 12),
+        (3, 4, 15),
+        (3, 8, 30),
+        (5, 3, 15),
+        (5, 5, 30),
+    ]
+}
+
+
+@pytest.mark.parametrize("multi, n, tail", testdata['correct'])
+def test_baisu_tail(multi, n, tail):
+    assert handler(baisu, multi=multi, n=n)[-1] == tail
+
+
+@pytest.mark.parametrize("multi, n, tail", testdata['wrong'])
+def test_baisu_tail_exceptions(multi, n, tail):
+    assert not handler(baisu, multi=multi, n=n)[-1] == tail
