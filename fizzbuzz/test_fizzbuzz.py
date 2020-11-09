@@ -1,27 +1,38 @@
 import pytest
 from fizzbuzz import generate_fizzbuzz_msg
+from numdefs import baisu, others
 
 
-@pytest.mark.parametrize('multiple_of_3', [i for i in range(1, 50) if i % 3 == 0 and i % 5 != 0 and i != 12])
-def test_return_fizz(multiple_of_3):
-    assert generate_fizzbuzz_msg(multiple_of_3) == 'Fizz'
+n_tests = 10
+test_seq = range(1, n_tests + 1)
 
 
-@pytest.mark.parametrize('multiple_of_5', [i for i in range(1, 50) if i % 5 == 0 and i % 3 != 0])
-def test_return_buzz(multiple_of_5):
-    assert generate_fizzbuzz_msg(multiple_of_5) == 'Buzz'
+def generate_baisu_seq(multi):
+    return map(baisu, [multi] * len(test_seq), test_seq)
+
+@pytest.mark.parametrize('fizz_numbers',
+                         generate_baisu_seq(3))
+def test_return_fizz(fizz_numbers):
+    assert generate_fizzbuzz_msg(fizz_numbers) == 'Fizz'
 
 
-@pytest.mark.parametrize('multiple_of_15', [i for i in range(1, 100) if i % 3 == 0 and i % 5 == 0])
-def test_return_fizzbuzz(multiple_of_15):
-    assert generate_fizzbuzz_msg(multiple_of_15) == 'FizzBuzz'
+@pytest.mark.parametrize('buzz_numbers',
+                         generate_baisu_seq(5))
+def test_return_buzz(buzz_numbers):
+    assert generate_fizzbuzz_msg(buzz_numbers) == 'Buzz'
 
 
-@pytest.mark.parametrize('otherwise', [i for i in range(1, 100) if i % 3 != 0 and i % 5 != 0])
-def test_return_fizzbuzz(otherwise):
-    assert generate_fizzbuzz_msg(otherwise) == str(otherwise)
+@pytest.mark.parametrize('fizzbuzz_numbers',
+                         generate_baisu_seq(15))
+def test_return_fizzbuzz(fizzbuzz_numbers):
+    assert generate_fizzbuzz_msg(fizzbuzz_numbers) == 'FizzBuzz'
+
+
+@pytest.mark.parametrize('others', map(others, test_seq))
+def test_return_asis(others):
+    assert generate_fizzbuzz_msg(others) == str(others)
 
 
 @pytest.mark.parametrize('consecutive', [12, 34])
-def test_return_fizzbuzz(consecutive):
+def test_return_renban(consecutive):
     assert generate_fizzbuzz_msg(consecutive) == str(consecutive) + '連番!'
