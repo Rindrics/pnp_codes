@@ -10,6 +10,7 @@ test_seq = range(1, n_tests + 1)
 def generate_baisu_seq(multi):
     return map(baisu, [multi] * len(test_seq), test_seq)
 
+
 @pytest.mark.parametrize('fizz_numbers',
                          generate_baisu_seq(3))
 def test_return_fizz(fizz_numbers):

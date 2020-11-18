@@ -11,6 +11,24 @@ def baisu(multi, n):
     return out
 
 
+def baisu2(multi, n):
+    if multi not in [3, 5, 15]:
+        raise Exception("Behavior for 'multi={multi}' is not defined."
+                        .format(multi=multi))
+    out = [multi]
+    i = 2
+    while len(out) < n:
+        candidate = i * multi
+        if multi == 3:
+            if candidate % 5 != 0 and candidate != 12:
+                out.append(candidate)
+        elif multi == 5:
+            if candidate % 3 != 0 and candidate != 12:
+                out.append(candidate)
+        i += 1
+    return out
+
+
 def candidate_meets_condition_of_baisu(baisu, candidate):
     condition_dic = {3: all([candidate % 3 == 0,
                              candidate % 5 != 0,
@@ -23,7 +41,7 @@ def candidate_meets_condition_of_baisu(baisu, candidate):
     try:
         return condition_dic[baisu]
     except KeyError:
-        raise Exception("Behavior for 'baisu = {baisu}' is not defined."
+        raise Exception("Behavior for 'baisu={baisu}' is not defined."
                         .format(baisu=baisu))
 
 

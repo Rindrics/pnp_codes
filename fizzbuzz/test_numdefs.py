@@ -1,4 +1,4 @@
-from numdefs import baisu, candidate_meets_condition_of_baisu, others
+from numdefs import baisu, candidate_meets_condition_of_baisu, others, baisu2
 import pytest
 
 
@@ -53,16 +53,23 @@ def handler(func, **args):
     return func(**args)
 
 
-@pytest.mark.parametrize("t_or_f, multi, n, exect", testdata)
-def test_baisu(t_or_f, multi, n, exect):
-    assert (handler(baisu, multi=multi, n=n) == exect) == t_or_f
+@pytest.mark.parametrize("t_or_f, multi, n, expect", testdata)
+def test_baisu(t_or_f, multi, n, expect):
+    assert (baisu(multi=multi, n=n) == expect) == t_or_f
 
 
 def test_others():
     assert others(1) == 1
     assert others(2) == 2
-    assert others(3) != 3
     assert others(3) == 4
-    assert others(4) != 5
-    assert others(5) != 6
-    assert others(5) == 7
+    assert others(4) == 7
+    assert others(5) == 8
+    assert others(6) == 11
+    assert others(7) == 13
+    assert others(8) == 14
+    assert others(9) == 16
+    assert others(10) == 17
+
+@pytest.mark.parametrize("t_or_f, multi, n, expect", testdata)
+def test_baisu2(t_or_f, multi, n, expect):
+    assert (baisu2(multi=multi, n=n)[-1] == expect) == t_or_f
