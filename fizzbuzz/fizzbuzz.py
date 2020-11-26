@@ -1,4 +1,4 @@
-def generate_fizzbuzz_msg(i):
+def generate_call(i):
     msg = ''
     if i % 3 == 0:
         msg += 'Fizz'

@@ -25,6 +25,8 @@ def baisu2(multi, n):
         elif multi == 5:
             if candidate % 3 != 0 and candidate != 12:
                 out.append(candidate)
+        elif multi == 15:
+                out.append(candidate)
         i += 1
     return out
 

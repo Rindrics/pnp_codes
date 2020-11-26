@@ -49,10 +49,6 @@ testdata = [
 ]
 
 
-def handler(func, **args):
-    return func(**args)
-
-
 @pytest.mark.parametrize("t_or_f, multi, n, expect", testdata)
 def test_baisu(t_or_f, multi, n, expect):
     assert (baisu(multi=multi, n=n) == expect) == t_or_f
