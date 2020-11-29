@@ -5,5 +5,5 @@ n_round = 3
 
 for i, player in enumerate(players * n_round):
     turn = i + 1
-    msg  = generate_fizzbuzz_msg(turn)
+    msg = generate_fizzbuzz_msg(turn)
     print(player + ': ' + msg)
